@@ -1,0 +1,9 @@
+host: '0.0.0.0'
+port: 9400
+metrics:
+- workdir: "."
+  scriptPath: "./metrics.js"
+  args:
+  <% for (var url of urls) { -%>
+  - <%= url %>
+  <% } -%>
