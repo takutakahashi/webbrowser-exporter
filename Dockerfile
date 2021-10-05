@@ -33,7 +33,6 @@ COPY ./yarn.lock /yarn.lock
 RUN yarn
 COPY ./lib/config.yaml.ejs /lib/config.yaml.ejs
 COPY ./lib/parse_config.js /lib/parse_config.js
-COPY ./lib/hosts.js /lib/hosts.js
 COPY ./metrics.js /metrics.js
 COPY ./entrypoint.sh /entrypoint.sh
 COPY ./lib/execute.js /lib/execute.js
@@ -41,6 +40,6 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /node_modules
-#USER pptruser
+USER pptruser
 EXPOSE 9400
 ENTRYPOINT ["/entrypoint.sh"]
