@@ -8,13 +8,13 @@ RUN apt-get update && apt-get install -yq libgconf-2-4
 RUN apt-get update && apt-get install -y wget --no-install-recommends \
     && apt-get install -y fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf \
       --no-install-recommends \
+    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt install -y ./google-chrome-stable_current_amd64.deb \
+    && rm google-chrome-stable_current_amd64.deb \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get purge --auto-remove -y curl \
     && rm -rf /src/*.deb
 
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-  && apt install -y ./google-chrome-stable_current_amd64.deb \
-  && rm google-chrome-stable_current_amd64.deb
 
 # It's a good idea to use dumb-init to help prevent zombie chrome processes.
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
